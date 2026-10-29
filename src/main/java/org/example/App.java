@@ -1,26 +1,28 @@
 package org.example;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class App {
     public static void main(String[] args) {
-        Music music1 = new Music("Песня 1", "Исполнитель 1", 3.5);
-        RockMusic rock = new RockMusic("Bohemian Rhapsody", "Queen", 5.5);
-        ClassicalMusic classic = new ClassicalMusic("Лунная соната", "Бетховен", 6.0);
+        Map<String, Building> buildings = new HashMap<>();
 
-        System.out.println("1. перегрузка методов (статический полиморфизм)");
-        music1.play();
-        music1.play(3);
-        music1.play(1.5);
+        buildings.put("ЖК Солнечный", new Residential("ЖК Солнечный", 1, 12, 120));
+        buildings.put("ЖК Лунный", new Residential("ЖК Лунный", 2, 9, 90));
+        buildings.put("ЖК Звездный", new Residential("ЖК Звездный", 3, 16, 200));
 
-        System.out.println("\n2. переопределение методов (динамический полиморфизм)");
-        Music[] playlist = {music1, rock, classic};
+        buildings.put("Бизнес-центр Альфа", new Office("Бизнес-центр Альфа", 4, 20, 15));
+        buildings.put("Бизнес-центр Бета", new Office("Бизнес-центр Бета", 5, 10, 8));
+        buildings.put("Бизнес-центр Гамма", new Office("Бизнес-центр Гамма", 6, 15, 12));
 
-        for (Music m : playlist) {
-            System.out.println(m.getTitle() + " - жанр: " + m.getGenre());
-        }
+        buildings.put("Городская больница №1", new Hospital("Городская больница №1", 7, 6, 20));
+        buildings.put("Городская больница №2", new Hospital("Городская больница №2", 8, 4, 12));
 
-        System.out.println("\n3. полиморфный вызов");
-        for (Music m : playlist) {
-            m.play();
+        for (Map.Entry<String, Building> entry : buildings.entrySet()) {
+            System.out.println("Ключ: " + entry.getKey());
+            System.out.println("значен: " + entry.getValue());
+
+            System.out.println();
         }
     }
 }
