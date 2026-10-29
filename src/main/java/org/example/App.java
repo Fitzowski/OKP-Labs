@@ -2,23 +2,25 @@ package org.example;
 
 public class App {
     public static void main(String[] args) {
-        Growable[] plants = {
-                new Tree("Дуб", 100, 50, "зелёный"),
-                new Tree("Берёза", 80, 40, "белый"),
-                new Tree("Сосна", 120, 30, "жёлтый"),
-                new Flower("Роза", 30, "красный"),
-                new Flower("Тюльпан", 20, "жёлтый")
-        };
+        Music music1 = new Music("Песня 1", "Исполнитель 1", 3.5);
+        RockMusic rock = new RockMusic("Bohemian Rhapsody", "Queen", 5.5);
+        ClassicalMusic classic = new ClassicalMusic("Лунная соната", "Бетховен", 6.0);
 
-        for (Growable plant : plants) {
-            plant.grow();
+        System.out.println("1. перегрузка методов (статический полиморфизм)");
+        music1.play();
+        music1.play(3);
+        music1.play(1.5);
 
-            if (plant instanceof Blooming) {
-                Blooming bloomable = (Blooming) plant;
-                bloomable.bloom();
-            }
+        System.out.println("\n2. переопределение методов (динамический полиморфизм)");
+        Music[] playlist = {music1, rock, classic};
 
-            System.out.println();
+        for (Music m : playlist) {
+            System.out.println(m.getTitle() + " - жанр: " + m.getGenre());
+        }
+
+        System.out.println("\n3. полиморфный вызов");
+        for (Music m : playlist) {
+            m.play();
         }
     }
 }
